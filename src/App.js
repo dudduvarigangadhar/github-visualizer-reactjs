@@ -10,7 +10,7 @@ import './App.css'
 
 const App = () => (
   <Switch>
-    <Route exact path="/" component={Home} />
+    <Route path="/" component={Home} />
     <Route exact path="/repository" component={Repository} />
     <Route
       exact
