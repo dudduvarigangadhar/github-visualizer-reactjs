@@ -1,0 +1,11 @@
+.repo-bg-container {
+  height: 100vh;
+  background-color: #0f172a;
+  padding: 10px;
+}
+
+.repo-main-heading {
+  color: #f8fafc;
+  font-size: 32px;
+  font-weight: 700;
+}

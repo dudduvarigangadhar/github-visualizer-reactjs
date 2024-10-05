@@ -1,6 +1,8 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useContext} from 'react'
 import Loader from 'react-loader-spinner'
 import Header from '../Header'
+import ProfileContext from '../../ProfileContext/index'
+
 import './index.css'
 
 const apiConstantStatus = {
@@ -11,11 +13,17 @@ const apiConstantStatus = {
 }
 
 const Home = () => {
-  const [username, setUsername] = useState('')
+  //   const [username, setUsername] = useState('')
   const [search, setSearch] = useState(false)
   const [apiStatus, setApiStatus] = useState(apiConstantStatus.initial)
   const [loading, setLoading] = useState(false)
   const [userData, setUserData] = useState([])
+  const [error, setError] = useState(false)
+  const {changeProfileName} = useContext(ProfileContext)
+  const {username} = useContext(ProfileContext)
+  const changeUsername = event => {
+    changeProfileName(event.target.value)
+  }
 
   const userFailureView = () => (
     <div className="visualizer-container">
@@ -50,49 +58,56 @@ const Home = () => {
       </div>
       <div className="website-details-view">
         <div className="followers-container">
-          <div className="followers view-container">
-            <p className="followers-headings">{userData.followers}</p>
+          <div className="followers following-view-container">
+            <p className="followers-headings-followers">{userData.followers}</p>
             <p className="following-result">FOLLOWERS</p>
           </div>
-          <div className="following view-container">
-            <p className="followers-headings">{userData.following}</p>
+          <div className="following following-view-container">
+            <p className="followers-headings-followers">{userData.following}</p>
             <p className="following-result">FOLLOWING</p>
           </div>
-          <div className="public-repos">
-            <p className="followers-headings">{userData.publicRepos}</p>
+          <div className="public-repos following-view-container">
+            <p className="followers-headings-followers">
+              {userData.publicRepos}
+            </p>
             <p className="following-result">PUBLIC REPOS</p>
           </div>
         </div>
         <div className="company-container">
           <div className="view-container">
             <p className="followers-headings">Company</p>
-            <div>
+            <div className="icon-container">
               <img
                 src="https://res.cloudinary.com/diqwk5cdp/image/upload/v1725554753/Line_zjk9pb.png"
                 alt="company"
+                className="about-icon"
               />
-              <p>{userData.company}</p>
+              <p className="home-footer-section-about">{userData.company}</p>
             </div>
           </div>
 
           <div className="view-container">
             <p className="followers-headings">Company Url</p>
-            <div>
+            <div className="icon-container">
               <img
                 src="https://res.cloudinary.com/diqwk5cdp/image/upload/v1725554753/link_uxjdr8.png"
                 alt="company url"
+                className="about-icon"
               />
-              <p>{userData.organizationsUrl}</p>
+              <p className="home-footer-section-about">
+                {userData.organizationsUrl}
+              </p>
             </div>
           </div>
           <div className="view-container">
             <p className="followers-headings">Location</p>
-            <div>
+            <div className="icon-container">
               <img
                 src="https://res.cloudinary.com/diqwk5cdp/image/upload/v1725554753/location_on_walrja.png"
                 alt="location"
+                className="about-icon"
               />
-              <p>{userData.location}</p>
+              <p className="home-footer-section-about">{userData.location}</p>
             </div>
           </div>
         </div>
@@ -115,15 +130,16 @@ const Home = () => {
     </div>
   )
 
-  const onChangeUsername = event => {
-    setUsername(event.target.value)
-  }
+  //   const onChangeUsername = event => {
+  //     setUsername(event.target.value)
+  //   }
 
   const getUserDetails = async () => {
     setLoading(true)
     const options = {
       method: 'GET',
     }
+    // api url
     const response = await fetch(apiUrl, options)
     if (response.ok === true) {
       const fetchedData = await response.json()
@@ -214,11 +230,12 @@ const Home = () => {
         <>
           <Header />
           <div>
-            <div className="InputContainer">
+            <div className="InputContainer" style={{marginBottom: '0px'}}>
               <input
                 placeholder="Enter github username"
                 className="input-name-container"
-                onChange={onChangeUsername}
+                // onChange={onChangeUsername}
+                onChange={changeUsername}
               />
               <div className="search-icon-container">
                 <img
@@ -229,8 +246,11 @@ const Home = () => {
                 />
               </div>
             </div>
+            {error && (
+              <p className="error-msg">Enter the valid github username</p>
+            )}
           </div>
-          {renderUserViews(apiStatus)}
+          <div>{renderUserViews(apiStatus)}</div>
         </>
       )}
     </div>

@@ -8,6 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 .InputContainer {
@@ -20,9 +21,19 @@
   justify-content: center;
 }
 
-.follwing-result {
-  font-size: 15px;
+.error-msg {
+  color: #dc2626;
+  margin-left: 555px;
+  margin-top: 0px;
+  padding: 0px;
+  font-size: 12px;
 }
+
+.following-result {
+  font-size: 12px;
+  /* margin-top: 0px; */
+}
+
 .input-name-container {
   background-color: #1d2537;
   width: 370px;
@@ -93,9 +104,9 @@
 }
 
 .user-profile-img {
-  height: 170px;
-  width: 170px;
-  border-radius: 161px;
+  height: 150px;
+  width: 150px;
+  border-radius: 150px;
   border: 2px solid #e2e2e2;
   /* border-color: #e2e2e2; */
 }
@@ -123,6 +134,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
 }
 
 .user-company {
@@ -141,6 +153,7 @@
   text-align: center;
   width: 682px;
   margin-top: 0px;
+  color: #f8fafc;
   height: 64px;
 }
 
@@ -151,20 +164,44 @@
 
 .followers {
   text-align: center;
+  /* border: 1px solid grey; */
+  width: 120px;
+
+  border-right: 1px solid #64748b;
+  height: 70px;
 }
 
 .following {
   text-align: center;
+  /* border: 1px solid grey;
+   */
+  border-right: 1px solid #64748b;
+  height: 70px;
+  width: 120px;
 }
 
 .public-repos {
   text-align: center;
+  /* border: 1px solid grey; */
+  width: 120px;
+  margin: 0;
+  /* height: 40px; */
 }
 
 .followers-headings {
   color: #3b82f6;
   font-weight: bold;
+  /* font-size: 35px; */
+  margin-bottom: 0px;
+  margin-left: 10px;
   /* margin-bottom: 0px; */
+}
+
+.followers-headings-followers {
+  color: #3b82f6;
+  font-weight: bold;
+  font-size: 25px;
+  margin: 0px;
 }
 
 .followers-subheadings {
@@ -172,13 +209,37 @@
 }
 
 .view-container {
-  width: 150px;
+  text-align: center;
+  /* width: 150px; */
   /* border-left-color: 1px solid #e2e2e2; */
 }
+
+.following-view-container {
+  /* margin-right: 60px; */
+}
+
 .company-container {
   display: flex;
   flex-direction: row;
-  /* justify-content: center; */
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* margin-top: 0px; */
+}
+
+.home-footer-section-about {
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+.about-icon {
+  margin-left: 20px;
 }
 
 .website-details-view {
