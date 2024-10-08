@@ -20,17 +20,25 @@ const Repository = () => {
         console.log(fetchedData)
         const updatedData = fetchedData.map(eachItem => ({
           name: eachItem.name,
-          languages: eachItem.languages,
+          languages: eachItem.languages.map(eachLanguage => ({
+            name: eachLanguage.name,
+            value: eachLanguage.value,
+          })),
           forks: eachItem.forks,
-          forksCount: eachItem.forksCount,
+          forksCount: eachItem.forks_count,
           forksUrl: eachItem.forks_url,
           id: eachItem.id,
+          description: eachItem.description,
           stargazersCount: eachItem.stargazers_count,
           stargazersUrl: eachItem.stargazers_url,
         }))
+        console.log(updatedData)
+
+        setRepos(updatedData)
       }
     }
     fetchRepos()
+    console.log('repos', repos)
   }, [])
 
   return (
@@ -38,6 +46,27 @@ const Repository = () => {
       <Header />
       <div>
         <h2 className="repo-main-heading">Repositories</h2>
+        <ul>
+          {repos.map(eachItem => (
+            <li className="repos-list-item">
+              <h1 className="repo-heading">{eachItem.name}</h1>
+              <p className="repo-description">{eachItem.description}</p>
+              <div className="languages-list">
+                {eachItem.languages.map(language => (
+                  <li
+                    style={{
+                      backgroundColor: `#${language.value}`,
+                      color: `#${language.value}`,
+                    }}
+                    className="language-container"
+                  >
+                    <p className="language-name">{language.name}</p>
+                  </li>
+                ))}
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   )
